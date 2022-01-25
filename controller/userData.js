@@ -177,6 +177,29 @@ exports.searchChat = (req, res, next) => {
             console.log(err);
         })
 }
+exports.getUserData = async (req,res,next) => {
+    try {
+        let userData = await user.findById(req.userId);
+        if(!userData){
+            return res.status(404).json({
+                message : "user not found",
+                status : 404
+            })
+        }
+        delete userData["password"];
+        return res.status(200).json({
+            userData,
+            message : "user data fetched successfully",
+            status : 200
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : error.message,
+            status : 500
+        })
+    }
+}
 // exports.makeCall = async (req,res,next) => {
 //     let callTo = req.body.callTo;
 //     let userData = await user.findOne({email:callTo})

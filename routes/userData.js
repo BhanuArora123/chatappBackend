@@ -12,6 +12,7 @@ router.get("/groups",isAuth,userController.Groups);
 router.get("/contacts",isAuth,userController.Contacts);
 router.get("/settings",isAuth,userController.Settings);
 router.get("/init",isAuth,userController.Contacts);
+router.get("/getuserData",isAuth,userController.getUserData);
 router.post("/editUser",isAuth,userController.editUser)
 router.post("/searchChat",isAuth,userController.searchChat);
 // router.post("/makeCall",isAuth,userController.makeCall);

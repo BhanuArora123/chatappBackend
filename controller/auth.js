@@ -61,16 +61,18 @@ exports.loginHandler = async (req,res,next) => {
         email:email,
         userId:userData._id
     },"secretismysecretnoneofyoursecret");
-    res.cookie("jwtToken",jwtToken,{
-        expires:new Date(Date.now() + 3600000),
-        httpOnly:true,
-        secure:true,
-        domain:"chatapp-client-12345.herokuapp.com"
-    });
+    // res.cookie("jwtToken",jwtToken,{
+    //     expires:new Date(Date.now() + 3600000),
+    //     httpOnly:true,
+    //     secure:true,
+    //     domain:"chatapp-client-12345.herokuapp.com"
+    // });
+    // removing password
+    delete userData["password"];
     return res.status(200).json({
         token:jwtToken,
         msg:"user created successfully",
-        token:jwtToken,
-        status:200
+        status:200,
+        userData
     });
 }
