@@ -179,16 +179,15 @@ exports.searchChat = (req, res, next) => {
 }
 exports.getUserData = async (req,res,next) => {
     try {
-        let userData = await user.findById(req.userId);
+        let userData = await user.findById(req.userId).populate("contacts.contactId");
         if(!userData){
             return res.status(404).json({
                 message : "user not found",
                 status : 404
             })
         }
-        delete userData["password"];
         return res.status(200).json({
-            userData,
+            userData : {...userData,password : undefined},
             message : "user data fetched successfully",
             status : 200
         });
