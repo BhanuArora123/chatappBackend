@@ -187,7 +187,7 @@ exports.getUserData = async (req,res,next) => {
             })
         }
         return res.status(200).json({
-            userData : {...userData,password : undefined},
+            userData : {...userData._doc,password : undefined},
             message : "user data fetched successfully",
             status : 200
         });
