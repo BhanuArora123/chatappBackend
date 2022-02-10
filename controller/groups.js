@@ -124,7 +124,7 @@ exports.sendGrpMessage = async (req, res, next) => {
         })
     }
     let chatData;
-    if (req.files.chatfile) {
+    if (req.files) {
         let mod = await _filePath;
         msg = await mod.posixPath(req.files.chatfile[0].path)
         chatData = new chats({
@@ -144,7 +144,7 @@ exports.sendGrpMessage = async (req, res, next) => {
             sentTo: mongoose.Types.ObjectId(groupData._id),
             sentBy: mongoose.Types.ObjectId(req.userId),
             chatContent: msg,
-            chatType: req.files.chatfile != undefined ? "File" : "Text",
+            chatType: req.files != undefined ? "File" : "Text",
             name: name,
             email: email
         })
@@ -153,7 +153,7 @@ exports.sendGrpMessage = async (req, res, next) => {
     groupData.chats.push({
         chatId: chatData._id
     });
-    if (req.files.chatFile) {
+    if (req.files) {
         let mediaData = new media({
             fileType: msg.split(".")[msg.split(".").length - 1],
             fileurl: msg,
